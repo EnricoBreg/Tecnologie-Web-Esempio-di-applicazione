@@ -19,4 +19,7 @@ Route::get('/', function () {
 
 Auth::routes();
 
-Route::get('/home', 'HomeController@index')->name('home');
+Route::get('/home', 'ExpenseController@index')->name('home');
+
+Route::resource('expense', 'ExpenseController')->except(['destroy']); // Creare tutte le rotte per il CRUD di una risorsa
+Route::get('/expense/{expense}/delete', 'ExpenseController@destroy');
