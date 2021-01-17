@@ -2,8 +2,10 @@
 
 namespace App\Http\Controllers;
 
-use App\Expense;
 use Illuminate\Http\Request;
+
+use App\Expense;
+use App\Category;
 
 use Log;
 
@@ -28,7 +30,9 @@ class ExpenseController extends Controller
      */
     public function create()
     {
-        return view('expenses.create');
+        $categories = Category::all();
+
+        return view('expenses.create', compact('categories'));
     }
 
     /**
@@ -40,6 +44,15 @@ class ExpenseController extends Controller
     public function store(Request $request)
     {
         $input = $request->all();
+
+        $validatedData = $request->validate([
+            'payed_at'      => 'required',
+            'description'   => 'required',
+            'amount'        => 'required|numeric|max:199|min:10',
+            'category_id'   => 'required',
+            'user_id'       => 'required',
+        ]);
+
         Expense::create($input);
         
         return redirect('/expense');

@@ -12,6 +12,7 @@
             <th scope="col">Cifra</th>
             <th scope="col">Portagoglio</th>
             <th scope="col">Descrizione</th>
+            <th scope="col">Categoria</th>
             <th scope="col">Azioni</th>
           </tr>
         </thead>
@@ -23,6 +24,7 @@
             <td>{{ $e->amount }} €</td>
             <td>{{ $e->user->name }}</td>
             <td>{{ $e->description }}</td>
+            <td>{{ $e->category->name }}</td>
             <td><a href="{{ URL::action('ExpenseController@edit', $e) }}" class="btn btn-outline-primary btn-sm">Modifica</a></td>
           </tr>
           @endforeach
